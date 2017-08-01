@@ -8,5 +8,8 @@ class User < ApplicationRecord
 
   def to_s
   	"#{self.email}"
-  end       
+  end
+
+  enum role: {normal: 0, admin: 1, guest: 2}
+
 end

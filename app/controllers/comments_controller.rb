@@ -1,4 +1,5 @@
 class CommentsController < ApplicationController
+	load_and_authorize_resource
   def create
   	@post = Post.find(params[:post_id])
   	@comment = @post.comments.build(comment_params)
@@ -15,6 +16,13 @@ class CommentsController < ApplicationController
   end
 
   def destroy
+  	@post = Post.find(params[:post_id])
+  	@comment = Comment.find(params[:id])
+  	@comment.destroy
+
+  	respond_to do |format|
+  		format.html { redirect_to @post, notice: 'El comentario fue eliminado' }
+  	end
   end
 
   private

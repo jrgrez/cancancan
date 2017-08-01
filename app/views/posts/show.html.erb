@@ -27,3 +27,15 @@
     	<%= f.submit %>
     </div>
 <% end %>
+
+<hr>
+	<h2>Comentarios</h2>
+
+<%= @comments.each do |comment| %>
+	<% unless comment.id.nil?  %>
+		<li>
+			<p><small><%= comment.user %> <%= comment.created_at.strftime("%d/%m/%Y %HH:%MM") %></small><%= link_to "X", post_comment_path(@post, comment), method: :delete, data: {confirm: "Seguro?"} %></p>
+			<p><%= comment.content %></p>
+		</li>
+	<% end %>
+<% end %>
